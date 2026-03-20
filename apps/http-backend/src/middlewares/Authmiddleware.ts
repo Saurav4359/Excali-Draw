@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-const key = "jfkndjnvx";
+import { JWT_SCERET } from "@repo/backend-common/config";
 export const AuthMiddleware = (
   req: Request,
   res: Response,
@@ -14,7 +14,7 @@ export const AuthMiddleware = (
     });
   }
 
-  const decode = jwt.verify(token, key);
+  const decode = jwt.verify(token, JWT_SCERET);
   if(!decode){ 
     return res.status(401).json({
         message : "Unauthorized"
